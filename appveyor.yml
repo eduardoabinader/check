@@ -49,7 +49,7 @@ before_build:
   - cd c:\projects\check
   - cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=%P%
     
- build:
+build:
   # build code and unit tests
   project: ALL_BUILD.vcxproj
   
