@@ -47,6 +47,7 @@ before_build:
   - echo Running cmake...
   - cd c:\projects\check
   - if %platform%==mingw cmake -G "MinGW Makefiles" -DCMAKE_INSTALL_PREFIX=%P%
+  - if %platform%==msvc call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
   - if %platform%==msvc cmake -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%P%
   - if %platform%==vs cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=%P%
     
