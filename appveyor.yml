@@ -47,7 +47,8 @@ before_build:
   - echo Running cmake...
   - echo %PATH%
   - cd c:\projects\check
-  - ps: if ($env:Build -eq "mingw") {$env:PATH = $env:PATH -replace "C:\\Program Files\\Git\\usr\\bin",""}
+  - ps: if ($env:Build -eq "mingw") {$env:PATH = $env:PATH -replace "C:\\Program Files\\Git\\usr\\bin;",""}
+  - echo Fixed %PATH%
   - if %platform%==mingw cmake -G "MinGW Makefiles" -DCMAKE_INSTALL_PREFIX=%P%
   - if %platform%==msvc call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
   - if %platform%==msvc cmake -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%P%
