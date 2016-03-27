@@ -47,10 +47,13 @@ configuration: Release
 before_build:
   - echo Running cmake...
   - cd c:\projects\check
-  - cmake -G "NMake Makefiles" .
+  - cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=%P%
+    
+ build:
+  # build code and unit tests
+  project: ALL_BUILD.vcxproj
   
-build_script:
-  # build and run all unit tests
-  - nmake
-  - nmake test
-  - nmake install
+test_script:
+  # run unit tests
+  - echo Running unit tests...
+  - msbuild "RUN_TESTS.vcxproj" /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
