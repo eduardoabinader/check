@@ -19,9 +19,11 @@ version: 1.0.{build}
 #    environment configuration    #
 #---------------------------------#
 
-# Operating system (build VM template)
-os: Visual Studio 2015
-
+environment:
+  matrix:
+  - platform: msvc
+  - platform: mingw
+    
 # scripts that are called at very beginning, before repo cloning
 # init:
 
@@ -36,16 +38,13 @@ init:
 #       build configuration       #
 #---------------------------------#
 
-platform:
-  - x86
-  - x64
-
 # build Configuration, i.e. Debug, Release, etc.
 configuration: Release
 
 # scripts to run before build
 before_build:
   - echo Running cmake...
+  - if %platform%==mingw (echo BMA MinGW) else (echo BMA MSVC)
   - cd c:\projects\check
   - cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=%P%
     
