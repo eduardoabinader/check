@@ -48,7 +48,6 @@ before_build:
   - cd c:\projects\check
   - ps: |
     if ($env:Build -eq "mingw") {
-      # Remove path to Git bin directory from PATH because it breaks MinGW config.
       $env:PATH = $env:PATH -replace "C:\\Program Files \(x86\)\\Git\\bin",""
       }
   - if %platform%==mingw cmake -G "MinGW Makefiles" -DCMAKE_INSTALL_PREFIX=%P%
