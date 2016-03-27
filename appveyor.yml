@@ -50,7 +50,4 @@ before_build:
   - cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=%P%
   
 build:
-  project: INSTALL.vcxproj
-
-test:
-  msbuild "RUN_TESTS.vcxproj"
+  project: RUN_TESTS.vcxproj
