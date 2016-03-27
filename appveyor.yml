@@ -47,8 +47,10 @@ configuration: Release
 before_build:
   - echo Running cmake...
   - cd c:\projects\check
-  - cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=%P%
+  - cmake -G "NMake Makefiles" .
   
-build:
+build_script:
   # build and run all unit tests
-  project: ALL_BUILD.vcxproj
+  - nmake
+  - nmake test
+  - nmake install
