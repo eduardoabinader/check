@@ -53,4 +53,4 @@ build:
   project: INSTALL.vcxproj
 
 test:
-  project: RUN_TESTS.vcxproj
+  msbuild "RUN_TESTS.vcxproj"
