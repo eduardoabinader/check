@@ -51,4 +51,6 @@ before_build:
   
 build:
   project: INSTALL.vcxproj
+
+test:
   project: RUN_TESTS.vcxproj
