@@ -48,7 +48,7 @@ before_build:
   - cd c:\projects\check
   - if %platform%==mingw set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0
   - echo %PATH%
-  - dir C:\MinGW\msys\1.0
+  - if %platform%==mingw sh --login -c "mount c:/mingw /mingw"
   - if %platform%==mingw sh --login -c "autoreconf -i"
   - if %platform%==mingw sh --login -c "./configure"
   - if %platform%==msvc call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
