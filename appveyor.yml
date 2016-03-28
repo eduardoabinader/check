@@ -46,15 +46,16 @@ configuration: Release
 before_build:
   - echo Running cmake...
   - cd c:\projects\check
-  - if %platform%==mingw set PATH=%PATH:C:\MinGW\bin;=%
+  - if %platform%==mingw set PATH=%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0
+  - echo %PATH%
+  - if %platform%==mingw sh --login -c "autoreconf -i"
+  - if %platform%==mingw sh --login -c "./configure"
   - if %platform%==msvc call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
   - if %platform%==msvc cmake -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%P%
   - if %platform%==vs cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=%P%
 
 build_script:
   # build code and unit tests
-  - if %platform%==mingw sh --login -c "autoreconf -i"
-  - if %platform%==mingw sh --login -c "./configure"
   - if %platform%==mingw sh --login -c "make"
   - if %platform%==msvc nmake
   - if %platform%==vs msbuild "ALL_BUILD.vcxproj"
