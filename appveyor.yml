@@ -21,7 +21,6 @@ version: 1.0.{build}
 
 environment:
   matrix:
-  - platform: mingw
   - platform: msvc
   - platform: vs
     
@@ -48,20 +47,17 @@ before_build:
   - echo %PATH%
   - cd c:\projects\check
   - del "C:\Program Files\Git\usr\bin\sh.exe"
-  - if %platform%==mingw cmake -G "MinGW Makefiles" -DCMAKE_INSTALL_PREFIX=%P%
   - if %platform%==msvc call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
   - if %platform%==msvc cmake -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%P%
   - if %platform%==vs cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=%P%
     
 build_script:
   # build code and unit tests
-  - if %platform%==mingw mingw32-make
   - if %platform%==vs msbuild "ALL_BUILD.vcxproj" /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - if %platform%==msvc nmake
   
 test_script:
   # run unit tests
   - echo Running unit tests...
-  - if %platform%==mingw mingw32-make test
   - if %platform%==msvc nmake test
   - if %platform%==vs msbuild "RUN_TESTS.vcxproj" /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
